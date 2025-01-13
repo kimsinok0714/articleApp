@@ -1,0 +1,64 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.4'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	// QueryDSL 
+	implementation 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"	
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+	// Vaidation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// MySQL 
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	// runtimeOnly 'mysql:mysql-connector-java:8.0.28'
+
+	// JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4") // 버전에 맞게 수정
+
+	// 테스트할 때 lombok을 사용하려면 설정 필요 :  버전 확인 (에러 발생)
+	// testCompileOnly 'org.projectlombok:lombok:1.18.12'
+	// testAnnotationProcessor 'org.projectlombok:lombok:1.18.12' 
+	
+
+}
+
+tasks.named('test') { 
+	useJUnitPlatform()
+}

@@ -1,0 +1,38 @@
+
+spring:
+  application:
+    name: articleapp
+  # DB 연결 정보
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_board?serverTimezone=Asia/Seoul&characterEncoding=utf8
+    username: react
+    password: 1234
+
+  # JPA 설정
+  # 애플리케이션이 실행될 때 Hibernate가 데이터베이스 스키마를 어떻게 관리할지를 지정합니다. 
+  # none : Hibernate가 데이터베이스 스키마를 변경하지 않습니다. 
+  # create : 애플리케이션이 실행될 때 기존 스키마를 삭제하고, 엔티티 매핑에 따라 새로운 스키마를 생성합니다.
+  # create-drop : Application이 종료 될 때 모든 테이블을 drop 시켜준다.  
+  # update : Hibernate가 엔티티 매핑에 따라 기존 데이터베이스 스키마를 수정합니다.(테이블, 컬럼 등 추가)
+  # validate : Hibernate가 엔티티 매핑과 데이터베이스 스키마의 일치 여부를 확인합니다 (주로 프로덕션 환경에서 스키마가 정확히 설정되었는지 확인할 때 사용됩니다.)
+  jpa:
+    hibernate:
+      ddl-auto: update   
+    # show-sql: true     # 콘솔에 출력
+    properties:
+      hibernate:       
+        format_sql: true
+
+
+# Logging
+logging:
+  level:
+    org.hibernate.SQL: debug             # SQL문 로그 출력
+    org.hibernate.orm.jdbc.bind: trace   # 중요 : 바인딩된 값 출력
+
+
+
+
+
+
