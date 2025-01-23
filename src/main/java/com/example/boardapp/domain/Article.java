@@ -35,6 +35,7 @@ public class Article {
     @Column(name = "reg_date" )
     private LocalDateTime regDate;
 
+    //  엔티티가 영속성 컨텍스트에 저장되기 전에 특정 동작을 수행
     @PrePersist
     public void prePersist() {
         this.regDate = this.regDate == null ? LocalDateTime.now() : this.regDate;
