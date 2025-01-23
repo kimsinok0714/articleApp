@@ -16,7 +16,7 @@ import jakarta.persistence.EntityManager;
 
 /*
  * JPAQueryFactory :
- * - Spring Data JPA에서 QueryDSL을 더 간단하고 효율적으로 사용할 수 있도록 돕는 클래스입니다.
+ * - JPAQueryFactory는 Querydsl의 핵심 클래스 중 하나로, JPQL을 대체할 수 있도록 지원합니다.
  */
 
 @Repository
@@ -27,7 +27,7 @@ public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
     // Querydsl
     private final JPAQueryFactory jpaQueryFactory;
 
-    
+    // 반드시 이렇게 주입해야 함.
     public  ArticleCustomRepositoryImpl(EntityManager em) {
         this.jpaQueryFactory = new JPAQueryFactory(em);
     }
@@ -36,7 +36,7 @@ public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
     /*
             QArticle: ( Q 클래스 생성 )
             - QueryDSL에 의해서 자동으로 생성되는 Article 엔티티에 대한 메타 모델 클래스로 
-            - Todo 엔티티와 매핑된 컬럼에 타입 세이프한 방식으로 접근할 수 있다.
+            - Todo 엔티티와 매핑된 필드에 타입 세이프한 방식으로 접근할 수 있다.
             - todo.no, todo.title ...  
             
             타입 세이프 쿼리 작성:
