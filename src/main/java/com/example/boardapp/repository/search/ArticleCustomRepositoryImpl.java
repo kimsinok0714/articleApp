@@ -54,6 +54,7 @@ public class ArticleCustomRepositoryImpl implements ArticleCustomRepository {
                 .where( writerLike(condition.getWriter()) ,   // null이면 조건은 쿼리에 추가되지 않는다.
                         titleLike(condition.getTitle()) ,
                         contentLike(condition.getContent()))
+                .orderBy(post.id.desc())
                 .offset(pageable.getPageNumber())  // 페이지 번호
                 .limit(pageable.getPageSize())   // 페이지당 데이터 개수     
                 .fetch();
